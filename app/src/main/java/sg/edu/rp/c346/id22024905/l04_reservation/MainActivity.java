@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
     EditText etName;
@@ -46,14 +48,32 @@ public class MainActivity extends AppCompatActivity {
         btnCfm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameInput = etName.getText().toString().trim();
-                String stringPhone = etPhone.toString();
-                String stringGrpSize = etGrpSize.toString();
-                Toast.makeText(getApplicationContext(), "Confirm button selected", Toast.LENGTH_SHORT).show();
+                String nameInput = etName.getText().toString();
+                String stringPhone = etPhone.getText().toString();
+                String stringGrpSize = etGrpSize.getText().toString();
 
-                if(! nameInput.isEmpty()){
-                    
+                int hour = tp.getHour();
+                int min = tp.getMinute();
+                String formTime = String.format("%02d:%02d", hour, min);
+                if(! nameInput.isEmpty()  && ! stringPhone.isEmpty() && ! stringGrpSize.isEmpty() && (rdSmoking.isChecked() || rdNotSmoking.isChecked())){
+                    Toast.makeText(MainActivity.this, "Name: " + nameInput, Toast.LENGTH_SHORT).show();
+
+                } else{
+                    Toast.makeText(getApplicationContext(), "You haven't entered a field, please try again", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etName.setText("");
+                etPhone.setText("");
+                etGrpSize.setText("");
+                rdSmoking.setChecked(false);
+                tp.setHour(19);
+                tp.setMinute(30);
+                dp.updateDate(2020, 5, 01);
             }
         });
     }
