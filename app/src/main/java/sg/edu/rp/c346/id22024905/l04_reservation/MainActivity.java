@@ -97,6 +97,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        tp.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                if(hourOfDay > 8 || (hourOfDay == 8 && minute == 0)){
+                    tp.setHour(8);
+                    tp.setMinute(0);
+                } else if(hourOfDay >= 21 || (hourOfDay == 20 && minute > 59)){
+                    tp.setHour(20);
+                    tp.setMinute(59);
+                }
+
+            }
+        });
+
     }
 
 
