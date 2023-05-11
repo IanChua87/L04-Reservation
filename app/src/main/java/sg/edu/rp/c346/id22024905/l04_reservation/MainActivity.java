@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -68,19 +70,17 @@ public class MainActivity extends AppCompatActivity {
                 String displayMsg = "";
 
                 if(!nameInput.isEmpty() && !stringPhone.isEmpty() && !stringGrpSize.isEmpty() && (rdSmoking.isChecked() || rdNotSmoking.isChecked())){
-                   displayMsg += "Name: " + nameInput + "\n" + "Phone: " + stringPhone + "\n" + "Group size: " + stringGrpSize + "\n" + "Date: " + formDate + "\n" + "Time: " + formTime + "\n";
+                   displayMsg += "Name: " + nameInput + "\n" + "Phone: " + stringPhone + "\n" + "Group size: " + stringGrpSize + "\n";
                    if(rdSmoking.isChecked()){
                        displayMsg += "Area: Smoking";
                    } else{
                        displayMsg += "Area: Non-smoking";
                    }
+                    displayMsg +=  "Date: " + formDate + "\n" + "Time: " + formTime;
                    Toast.makeText(MainActivity.this, displayMsg, Toast.LENGTH_LONG).show();
                } else{
                    Toast.makeText(MainActivity.this, "Error! Not all fields are filled", Toast.LENGTH_SHORT).show();
                }
-
-
-
             }
         });
 
