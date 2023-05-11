@@ -60,17 +60,21 @@ public class MainActivity extends AppCompatActivity {
                 int month = dp.getMonth();
                 int dom = dp.getDayOfMonth();
                 int year = dp.getYear();
-                int grpSize = Integer.parseInt(etGrpSize.getText().toString());
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year, month, dom);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 String formDate = dateFormat.format(calendar.getTime());
                 int areaRadioButtonID = rdSmokingGrp.getCheckedRadioButtonId();
+                String displayMsg = "";
 
-
-               if(!nameInput.isEmpty() && !stringPhone.isEmpty() && !stringGrpSize.isEmpty() && (rdSmoking.isChecked() || rdNotSmoking.isChecked())){
-                   String displayMsg = "Name: " + nameInput + "\n" + "Phone: " + stringPhone + "\n" + "Group size: " + stringGrpSize + "\n" + "Date: " + formDate + "\n" + "Time: " + formTime + "\n" + "Area: " + areaRadioButtonID;
-                   Toast.makeText(MainActivity.this, displayMsg, Toast.LENGTH_SHORT).show();
+                if(!nameInput.isEmpty() && !stringPhone.isEmpty() && !stringGrpSize.isEmpty() && (rdSmoking.isChecked() || rdNotSmoking.isChecked())){
+                   displayMsg += "Name: " + nameInput + "\n" + "Phone: " + stringPhone + "\n" + "Group size: " + stringGrpSize + "\n" + "Date: " + formDate + "\n" + "Time: " + formTime + "\n";
+                   if(rdSmoking.isChecked()){
+                       displayMsg += "Area: Smoking";
+                   } else{
+                       displayMsg += "Area: Non-smoking";
+                   }
+                   Toast.makeText(MainActivity.this, displayMsg, Toast.LENGTH_LONG).show();
                } else{
                    Toast.makeText(MainActivity.this, "Error! Not all fields are filled", Toast.LENGTH_SHORT).show();
                }
