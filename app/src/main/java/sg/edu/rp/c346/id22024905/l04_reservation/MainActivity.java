@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     DatePicker dp;
     Button btnCfm;
     Button btnReset;
-    TextView dpText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
         dp = findViewById(R.id.datePicker);
         btnCfm = findViewById(R.id.buttonConfirm);
         btnReset = findViewById(R.id.buttonReset);
-        dpText = findViewById(R.id.displayText);
+
 
         btnCfm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String nameInput = etName.getText().toString();
                 String stringPhone = etPhone.getText().toString();
                 String stringGrpSize = etGrpSize.getText().toString();
@@ -55,12 +57,26 @@ public class MainActivity extends AppCompatActivity {
                 int hour = tp.getHour();
                 int min = tp.getMinute();
                 String formTime = String.format("%02d:%02d", hour, min);
-                if(! nameInput.isEmpty()  && ! stringPhone.isEmpty() && ! stringGrpSize.isEmpty() && (rdSmoking.isChecked() || rdNotSmoking.isChecked())){
-                    Toast.makeText(MainActivity.this, "Name: " + nameInput, Toast.LENGTH_SHORT).show();
+                int month = dp.getMonth();
+                int dom = dp.getDayOfMonth();
+                int year = dp.getYear();
+                int grpSize = Integer.parseInt(etGrpSize.getText().toString());
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, month, dom);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String formDate = dateFormat.format(calendar.getTime());
+                int areaRadioButtonID = rdSmokingGrp.getCheckedRadioButtonId();
 
-                } else{
-                    Toast.makeText(getApplicationContext(), "You haven't entered a field, please try again", Toast.LENGTH_SHORT).show();
-                }
+
+               if(!nameInput.isEmpty() && !stringPhone.isEmpty() && !stringGrpSize.isEmpty() && (rdSmoking.isChecked() || rdNotSmoking.isChecked())){
+                   String displayMsg = "Name: " + nameInput + "\n" + "Phone: " + stringPhone + "\n" + "Group size: " + stringGrpSize + "\n" + "Date: " + formDate + "\n" + "Time: " + formTime + "\n" + "Area: " + areaRadioButtonID;
+                   Toast.makeText(MainActivity.this, displayMsg, Toast.LENGTH_SHORT).show();
+               } else{
+                   Toast.makeText(MainActivity.this, "Error! Not all fields are filled", Toast.LENGTH_SHORT).show();
+               }
+
+
+
             }
         });
 
@@ -74,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 tp.setHour(19);
                 tp.setMinute(30);
                 dp.updateDate(2020, 5, 01);
+
             }
         });
     }
