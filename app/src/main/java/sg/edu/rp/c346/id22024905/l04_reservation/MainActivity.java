@@ -20,6 +20,10 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
+    TextView tvGrpSize;
+    TextView tvArea;
+    TextView tvTime;
+    TextView tvDate;
     EditText etName;
     EditText etPhone;
     EditText etGrpSize;
@@ -46,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
         dp = findViewById(R.id.datePicker);
         btnCfm = findViewById(R.id.buttonConfirm);
         btnReset = findViewById(R.id.buttonReset);
+        tvGrpSize = findViewById(R.id.textViewGrpSize);
+        tvArea = findViewById(R.id.textViewArea);
+        tvTime = findViewById(R.id.textViewTime);
+        tvDate = findViewById(R.id.textViewDate);
+
 
 
         btnCfm.setOnClickListener(new View.OnClickListener() {
@@ -66,19 +75,23 @@ public class MainActivity extends AppCompatActivity {
                 calendar.set(year, month, dom);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 String formDate = dateFormat.format(calendar.getTime());
-                int areaRadioButtonID = rdSmokingGrp.getCheckedRadioButtonId();
                 String displayMsg = "";
+                String areaMsg = "";
 
                 if(!nameInput.isEmpty() && !stringPhone.isEmpty() && !stringGrpSize.isEmpty() && (rdSmoking.isChecked() || rdNotSmoking.isChecked())){
-                   displayMsg += "Name: " + nameInput + "\n" + "Phone: " + stringPhone + "\n" + "Group size: " + stringGrpSize + "\n";
+                   displayMsg += "Name: " + nameInput + "\n" + "Phone: " + stringPhone + "\n";
+                    Toast.makeText(MainActivity.this, displayMsg, Toast.LENGTH_LONG).show();
                    if(rdSmoking.isChecked()){
-                       displayMsg += "Area: Smoking";
-                   } else{
-                       displayMsg += "Area: Non-smoking";
+                       areaMsg = "Smoking area";
+                   } else {
+                       areaMsg = "Non-smoking area";
                    }
-                    displayMsg +=  "Date: " + formDate + "\n" + "Time: " + formTime;
-                   Toast.makeText(MainActivity.this, displayMsg, Toast.LENGTH_LONG).show();
-               } else{
+                    tvGrpSize.setText("Group size: " + stringGrpSize);
+                    tvArea.setText("Area: " + areaMsg);
+                    tvTime.setText("Time: " + formTime);
+                    tvDate.setText("Date: " + formDate);
+               }
+                else{
                    Toast.makeText(MainActivity.this, "Error! Not all fields are filled", Toast.LENGTH_SHORT).show();
                }
             }

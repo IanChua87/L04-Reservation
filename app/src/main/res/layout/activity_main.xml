@@ -129,6 +129,30 @@
                     android:text="@string/reset" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/textViewGrpSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Group size:" />
+
+            <TextView
+                android:id="@+id/textViewArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Area:" />
+
+            <TextView
+                android:id="@+id/textViewTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Time:" />
+
+            <TextView
+                android:id="@+id/textViewDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date:" />
+
         </LinearLayout>
 
     </ScrollView>
