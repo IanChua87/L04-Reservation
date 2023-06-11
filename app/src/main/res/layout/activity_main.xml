@@ -132,26 +132,22 @@
             <TextView
                 android:id="@+id/textViewGrpSize"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Group size:" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/textViewArea"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Area:" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/textViewTime"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Time:" />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/textViewDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Date:" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

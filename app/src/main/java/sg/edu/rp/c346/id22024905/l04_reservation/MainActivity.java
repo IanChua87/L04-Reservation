@@ -77,22 +77,32 @@ public class MainActivity extends AppCompatActivity {
                 String formDate = dateFormat.format(calendar.getTime());
                 String displayMsg = "";
                 String areaMsg = "";
+                String timeDateMsg = "";
 
                 if(!nameInput.isEmpty() && !stringPhone.isEmpty() && !stringGrpSize.isEmpty() && (rdSmoking.isChecked() || rdNotSmoking.isChecked())){
                    displayMsg += "Name: " + nameInput + "\n" + "Phone: " + stringPhone + "\n";
-                    Toast.makeText(MainActivity.this, displayMsg, Toast.LENGTH_LONG).show();
+                   Toast.makeText(MainActivity.this, displayMsg, Toast.LENGTH_LONG).show();
                    if(rdSmoking.isChecked()){
-                       areaMsg = "Smoking area";
+                       areaMsg += "Area: Smoking area";
                    } else {
-                       areaMsg = "Non-smoking area";
+                       areaMsg += "Area: Non-smoking area";
                    }
+
+//                   areaMsg += "Group size: " + stringGrpSize + "\n";
+//                   Toast.makeText(MainActivity.this, areaMsg, Toast.LENGTH_LONG).show();
+//                   timeDateMsg += "Time: " + formTime + "\n" + "Date: " + formDate;
+//                   Toast.makeText(MainActivity.this, timeDateMsg, Toast.LENGTH_LONG).show();
                     tvGrpSize.setText("Group size: " + stringGrpSize);
-                    tvArea.setText("Area: " + areaMsg);
+                    tvArea.setText("" + areaMsg);
                     tvTime.setText("Time: " + formTime);
                     tvDate.setText("Date: " + formDate);
                }
                 else{
                    Toast.makeText(MainActivity.this, "Error! Not all fields are filled", Toast.LENGTH_SHORT).show();
+                    tvGrpSize.setText("");
+                    tvArea.setText("");
+                    tvTime.setText("");
+                    tvDate.setText("");
                }
             }
         });
@@ -107,21 +117,25 @@ public class MainActivity extends AppCompatActivity {
                 tp.setHour(19);
                 tp.setMinute(30);
                 dp.updateDate(2020, 5, 01);
-
+                tvGrpSize.setText("");
+                tvArea.setText("");
+                tvTime.setText("");
+                tvDate.setText("");
             }
         });
 
         tp.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                if(hourOfDay > 8 || (hourOfDay == 8 && minute == 0)){
-                    tp.setHour(8);
-                    tp.setMinute(0);
-                } else if(hourOfDay >= 21 || (hourOfDay == 20 && minute > 59)){
-                    tp.setHour(20);
-                    tp.setMinute(59);
+                if(hourOfDay >= 8 && hourOfDay < 21){
+                    Toast.makeText(MainActivity.this, "Reservation time: " + hourOfDay, Toast.LENGTH_SHORT).show();
+                } else{
+                    Toast.makeText(MainActivity.this, "Reservation time is only between 8AM and 8:59PM", Toast.LENGTH_SHORT).show();
+                    tvGrpSize.setText("");
+                    tvArea.setText("");
+                    tvTime.setText("");
+                    tvDate.setText("");
                 }
-
             }
         });
 
