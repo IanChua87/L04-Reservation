@@ -131,15 +131,9 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Reservation time: " + hourOfDay, Toast.LENGTH_SHORT).show();
                 } else{
                     Toast.makeText(MainActivity.this, "Reservation time is only between 8AM and 8:59PM", Toast.LENGTH_SHORT).show();
-                    tvGrpSize.setText("");
-                    tvArea.setText("");
-                    tvTime.setText("");
-                    tvDate.setText("");
                 }
             }
         });
 
     }
-
-
 }
